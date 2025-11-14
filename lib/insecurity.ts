@@ -134,11 +134,12 @@ export const redirectAllowlist = new Set([
 ])
 
 export const isRedirectAllowed = (url: string) => {
-  let allowed = false
   for (const allowedUrl of redirectAllowlist) {
-    allowed = allowed || url.includes(allowedUrl) // vuln-code-snippet vuln-line redirectChallenge
+    if (url === allowedUrl) {
+      return true
+    }
   }
-  return allowed
+  return url.startsWith('/')
 }
 // vuln-code-snippet end redirectCryptoCurrencyChallenge redirectChallenge
 
